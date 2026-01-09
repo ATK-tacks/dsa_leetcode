@@ -23,3 +23,27 @@ public:
         return ans;
     }
 };
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int> ans;
+        if (!root) return ans;
+
+        stack<pair<TreeNode*, bool>> st;
+        st.push({root, false});
+
+        while (!st.empty()) {
+            auto [node, visited] = st.top();
+            st.pop();
+
+            if (!node) continue;
+
+            if (!visited) {
+                // Postorder: Left → Right → Node
+                st.push({node, true});          // process later
+                st.push({node->right, false}); // right child
+                st.push({node->left, false});  // left child
+            } else {
+                ans.push_back(node->val);      // ROOT
+            }
+        }
+        return ans;
+    }
