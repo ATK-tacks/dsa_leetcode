@@ -24,3 +24,20 @@ public:
         return ans;
     }
 };
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> ans;
+        // preorder(root , ans);
+        // return ans;
+
+        if(root == NULL) return ans;
+        stack<TreeNode*> st;
+        st.push(root);
+        while(!st.empty()){
+            root = st.top();
+            st.pop();
+            if(root->right) st.push(root->right);
+            if(root->left) st.push(root->left);
+            ans.push_back(root->val);   
+        }
+        return ans;
+    }
